@@ -1,5 +1,6 @@
 import './styles/global.scss';
 import './App.scss';
+import QuickLinks from './components/QuickLinks';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -24,8 +25,9 @@ function App() {
           ) : (
             <LightModeIcon className='theme-icon' color="primary" onClick={toggleTheme} titleAccess="Switch to light mode" />
           )}
-        </div>        
+        </div>           
       </div>
+      <QuickLinks />   
     </ThemeProvider>
   )
 }
