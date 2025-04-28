@@ -13,6 +13,10 @@
 
     > .quick-links-list {
         
+        > .MuiStack-root:last-child {
+            margin-bottom: 10px;
+        }
+        
         .quick-link-item {
             display: flex;        
             justify-content: center;

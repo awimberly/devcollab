@@ -1,22 +1,39 @@
-# Logs
-logs
+# Node modules
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build outputs
+dist/
+client/dist/
+server/dist/
+
+# Prisma
+server/prisma/migrations/
+
+# Environment Variables
+*.env
+
+# Vercel / Netlify
+.vercel/
+.netlify/
+
+# IDEs and OS junk
+.vscode/
+.idea/
+.DS_Store
+
+# Log files
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Misc
+dist-ssr/
 *.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
