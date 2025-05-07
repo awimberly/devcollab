@@ -1,4 +1,6 @@
 {
+  "name": "devcollab",
+  "version": "0.1.1",
   "devDependencies": {
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
@@ -8,7 +10,7 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-},
+  },
   "scripts": {
     "release": "standard-version"
   }
