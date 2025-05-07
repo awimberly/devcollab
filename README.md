@@ -1,54 +1,118 @@
-# React + TypeScript + Vite
+# DevCollab 🧠💬
+A full-stack collaboration app with secure authentication, built using:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- React + Vite (frontend)
+- Node.js, Express, and Prisma (backend)
+- Supabase PostgreSQL (database)
+- JWT Auth + bcrypt for login security
+- Jest + Supertest for testing
+- GitHub Actions for CI
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔧 Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js 18+
+- PostgreSQL or Supabase project
+- `.env` file configured
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 📁 Folder Structure
+
+```
+devcollab/
+├── client/              # Frontend React app
+|   ├── src/
+|       ├── assets/
+|       ├── components/
+|       ├── data/
+|       ├── hooks/
+|       ├── styles/
+├── server/              # Backend API
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── routes/
+│   │   ├── __tests__/
+│   │   └── utils/
+│   ├── prisma/
+│   ├── app.ts
+│   ├── server.ts
+│   └── .env
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Environment Setup
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+Create a `.env` file inside `/server` with the following:
+
 ```
+DATABASE_URL="your_postgres_connection_string"
+JWT_SECRET="your_super_secure_secret"
+PORT=5000
+```
+
+---
+
+## 🚀 Running the App
+
+### Backend
+```bash
+cd server
+npm install
+npx prisma generate
+npx prisma db push
+npm run dev
+```
+
+### Frontend
+```bash
+cd client
+npm install
+npm run dev
+```
+
+---
+
+## 🔐 Auth Routes
+
+| Route               | Method | Description              |
+|--------------------|--------|--------------------------|
+| `/api/auth/register` | POST   | Register new user        |
+| `/api/auth/login`    | POST   | Login + get JWT          |
+| `/api/auth/protected`| GET    | Requires valid token     |
+
+Use `Authorization: Bearer <token>` in protected requests.
+
+---
+
+## 🧪 Running Tests
+
+Inside `/server`, run:
+
+```bash
+npx jest
+```
+
+### What’s tested?
+
+- ✅ `/api/auth/register` - success and duplicate emails
+- ✅ `/api/auth/login` - valid and invalid credentials
+- ✅ `/api/auth/protected` - access granted and denied
+- ✅ Password hashing and token issuance
+
+---
+
+## ✅ GitHub Actions CI
+
+Automatically runs tests on push or pull request to `main`.
+
+See `.github/workflows/test.yml`
+
+---
+
+## 📄 License
+
+MIT — use it, remix it, build with it.
