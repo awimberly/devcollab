@@ -1,14 +1,14 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 import { register, login } from "../controllers/authController";
 
 const router = Router();
 
 // Placeholder route
-router.get("/", (req, res) => {
+router.get("/", (req: Request, res: Response) => {
   res.send("Auth route is working ✅");
 });
 
-router.post("/register", register);
-router.post("/login", login);
+router.post("/register", register as (req: Request, res: Response) => void);
+router.post("/login", login as (req: Request, res: Response) => void);
 
 export default router;
