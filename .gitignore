@@ -11,8 +11,18 @@ server/dist/
 # Prisma
 server/prisma/migrations/
 
+# Ignore TypeScript build output
+*.js
+*.js.map
+*.d.ts
+
+# Ignore test cache and coverage
+coverage/
+.jest/
+
 # Environment Variables
 *.env
+.env.*
 
 # Vercel / Netlify
 .vercel/
