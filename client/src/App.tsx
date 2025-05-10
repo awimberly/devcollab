@@ -7,18 +7,17 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import QuickLinks from './components/QuickLinks';
+import { useAuth } from './context/AuthContext';
 
 function App() {
   const { theme, toggleTheme } = useDarkMode();
+  const { isAuthenticated } = useAuth();
 
   const muiTheme = createTheme({
     palette: {
       mode: theme,
     },
   });
-
-  const isAuthenticated = !!localStorage.getItem('token'); // crude check for now
-  console.log('isAuthenticated:', isAuthenticated);
 
   return (
     <ThemeProvider theme={muiTheme}>

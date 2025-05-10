@@ -1,84 +1,51 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState } from 'react';
+import axios from 'axios';
 
 interface User {
-  id: number;
-  name: string;
+  id: string;
   email: string;
+  fullName?: string;
+  // add more fields as needed
 }
 
 interface AuthContextType {
-  isAuthenticated: boolean;
   user: User | null;
+  isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; message?: string }>;
-  logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+const baseUrl = import.meta.env.VITE_API_URL;
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const baseUrl = import.meta.env.VITE_API_URL;
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userData = localStorage.getItem('user');
-
-    if (token && userData) {
-      setIsAuthenticated(true);
-      setUser(JSON.parse(userData));
-    }
-  }, []);
-
-  const login = async (
-    email: string,
-    password: string
-  ): Promise<{ success: boolean; message?: string }> => {
-    
-    if (!email || !password) {
-        return { success: false, message: 'Email and password are required.' };
-    }
-    
+  const login = async (email: string, password: string) => {
     try {
-      const res = await fetch(`${baseUrl}/api/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await axios.post(`${baseUrl}/api/auth/login`, { email, password });
 
-      const data = await res.json();
+      const { token, user } = res.data;
 
-      if (!res.ok) {
-        return { success: false, message: data.message || 'Login failed' };
-      }
-
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('token', token);
+      setUser(user);
       setIsAuthenticated(true);
-      setUser(data.user);
-      return { success: true };
-    } catch (err) {
-      console.error(err);
-      return { success: false, message: 'Something went wrong.' };
-    }
-  };
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setIsAuthenticated(false);
-    setUser(null);
+      return { success: true };
+    } catch (err: any) {
+      return {
+        success: false,
+        message: err.response?.data?.message || 'Login failed.',
+      };
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth must be used within an AuthProvider');
-  return context;
-};
+export const useAuth = () => useContext(AuthContext);
