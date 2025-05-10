@@ -1,12 +1,26 @@
 # DevCollab 🧠💬
-A full-stack collaboration app with secure authentication, built using:
 
-- React + Vite (frontend)
-- Node.js, Express, and Prisma (backend)
-- Supabase PostgreSQL (database)
-- JWT Auth + bcrypt for login security
-- Jest + Supertest for testing
-- GitHub Actions for CI
+A full-stack developer collaboration platform with secure authentication, modular architecture, and built-in CI/CD.
+
+> 🔐 Designed with best practices in mind: tested, documented, and production-ready.
+
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/awimberly/devcollab/test.yml?branch=main)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![Node.js](https://img.shields.io/badge/node-18%2B-brightgreen)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
+📖 See [CHANGELOG.md](./CHANGELOG.md) for version history.
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend**: React + Vite
+- **Backend**: Node.js + Express + Prisma
+- **Database**: Supabase PostgreSQL
+- **Auth**: JWT + bcrypt
+- **Testing**: Jest + Supertest
+- **CI**: GitHub Actions
 
 ---
 
@@ -23,19 +37,19 @@ A full-stack collaboration app with secure authentication, built using:
 ```
 devcollab/
 ├── client/              # Frontend React app
-|   ├── src/
-|       ├── assets/
-|       ├── components/
-|       ├── data/
-|       ├── hooks/
-|       ├── styles/
+│   └── src/
+│       ├── assets/
+│       ├── components/
+│       ├── data/
+│       ├── hooks/
+│       └── styles/
 ├── server/              # Backend API
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── middleware/
-│   │   ├── routes/
-│   │   ├── __tests__/
-│   │   └── utils/
+│   └── src/
+│       ├── controllers/
+│       ├── middleware/
+│       ├── routes/
+│       ├── __tests__/
+│       └── utils/
 │   ├── prisma/
 │   ├── app.ts
 │   ├── server.ts
@@ -48,7 +62,7 @@ devcollab/
 
 Create a `.env` file inside `/server` with the following:
 
-```
+```env
 DATABASE_URL="your_postgres_connection_string"
 JWT_SECRET="your_super_secure_secret"
 PORT=5000
@@ -78,11 +92,10 @@ npm run dev
 
 ## 🔐 Auth Routes
 
-| Route               | Method | Description              |
-|--------------------|--------|--------------------------|
-| `/api/auth/register` | POST   | Register new user        |
-| `/api/auth/login`    | POST   | Login + get JWT          |
-| `/api/auth/protected`| GET    | Requires valid token     |
+| Route                 | Method | Description          |
+|----------------------|--------|----------------------|
+| `/api/auth/register` | POST   | Register new user    |
+| `/api/auth/login`    | POST   | Login + get JWT      |
 
 Use `Authorization: Bearer <token>` in protected requests.
 
@@ -100,16 +113,14 @@ npx jest
 
 - ✅ `/api/auth/register` - success and duplicate emails
 - ✅ `/api/auth/login` - valid and invalid credentials
-- ✅ `/api/auth/protected` - access granted and denied
-- ✅ Password hashing and token issuance
 
 ---
 
 ## ✅ GitHub Actions CI
 
-Automatically runs tests on push or pull request to `main`.
+Automatically runs tests on push or pull request to [main, develop] branches.
 
-See `.github/workflows/test.yml`
+See [`test.yml`](.github/workflows/test.yml)
 
 ---
 
