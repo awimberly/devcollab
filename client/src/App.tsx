@@ -1,35 +1,46 @@
 import './styles/global.scss';
 import './App.scss';
-import QuickLinks from './components/QuickLinks';
+import { useDarkMode } from './hooks/useDarkMode';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useDarkMode } from './hooks/useDarkMode';  
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './components/Login';
+import QuickLinks from './components/QuickLinks';
 
 function App() {
   const { theme, toggleTheme } = useDarkMode();
-  
+
   const muiTheme = createTheme({
     palette: {
       mode: theme,
     },
   });
 
+  const isAuthenticated = !!localStorage.getItem('token'); // crude check for now
+  console.log('isAuthenticated:', isAuthenticated);
+
   return (
     <ThemeProvider theme={muiTheme}>
-      <div className="header">
-        <div className='header-text'>Developer Dashboard</div>
-        <div className='theme-toggle'>
-          {theme === 'light' ? (
-            <DarkModeIcon className='theme-icon' color="primary" onClick={toggleTheme} titleAccess="Switch to dark mode" />
-          ) : (
-            <LightModeIcon className='theme-icon' color="primary" onClick={toggleTheme} titleAccess="Switch to light mode" />
-          )}
-        </div>           
-      </div>
-      <QuickLinks />   
+        {isAuthenticated ? (
+          <>
+            <div className="header">
+              <div className='header-text'>Developer Dashboard</div>
+              <div className='theme-toggle'>
+                {theme === 'light' ? (
+                  <DarkModeIcon className='theme-icon' color="primary" onClick={toggleTheme} />
+                ) : (
+                  <LightModeIcon className='theme-icon' color="primary" onClick={toggleTheme} />
+                )}
+              </div>
+            </div>
+            <QuickLinks />
+          </>
+        ) : (
+          <Login />
+        )}
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;
