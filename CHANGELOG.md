@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0] - 2025-05-10
+### Added
+- Login form UI with MUI styling
+- Context-based authentication with 'AuthProvider'
+- Frontend token management and validation
+- Redirect to dashboard after login
+
 ### [0.1.1](https://github.com/awimberly/devcollab/compare/v0.1.0...v0.1.1) (2025-05-08)
 
 ### Added
