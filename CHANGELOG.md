@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0] - 2025-05-14
+### Changed
+- Replaced custom JWT/bcrypt-based authentication with Supabase Auth
+- Removed `AuthContext`, legacy token logic, and backend `verifyToken` middleware
+- Switched to secure session handling via Supabase access token
+- Wrapped frontend in `<BrowserRouter>` to enable navigation
+- Added Logout functionality using Supabase signOut
+- Improved layout of QuickLinks dashboard
+- Added favicon and minor SCSS polish for dashboard appearance
+
 ## [0.2.0] - 2025-05-10
 ### Added
 - Login form UI with MUI styling

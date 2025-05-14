@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import authRoutes from "./routes/authRoutes";
 
 const app = express();
 app.use(cors());             // ✅ Cross-origin requests (CORS)

@@ -23,15 +23,17 @@ function QuickLinks() {
     ));
 
     return (
-        <div className="quick-links">
-            <div className="quick-link-header">
-                <h2>Quick Links</h2>
+        <div className="dashboard-container">
+            <div className="quick-links">
+                <div className="quick-link-header">
+                    <h2>Quick Links</h2>
+                </div>
+                <div className="quick-links-list">
+                    <Stack spacing={1}>
+                        {links}  
+                    </Stack>
+                </div>   
             </div>
-            <div className="quick-links-list">
-                <Stack spacing={1}>
-                    {links}  
-                </Stack>
-            </div>   
         </div>
     );
 }
