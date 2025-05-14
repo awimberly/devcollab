@@ -1,25 +1,35 @@
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { supabase } from '../supabase';
+import { useNavigate } from 'react-router-dom';
 import './Login.scss';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 
 function Login() {
-  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    const result = await login(email, password);
-    if (!result.success) {
-      setError(result.message || 'Login failed.');
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) {
+      setError(error.message);
+    } else {
+      console.log('Login success:', data);
+      navigate('/'); 
     }
   };
+
 
   return (
     <div className="login-container">
