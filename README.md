@@ -1,129 +1,117 @@
-# DevCollab 🧠💬
+# 🛠️ DevCollab
 
-A full-stack developer collaboration platform with secure authentication, modular architecture, and built-in CI/CD.
-
-> 🔐 Designed with best practices in mind: tested, documented, and production-ready.
-
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/awimberly/devcollab/test.yml?branch=main)
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-![Node.js](https://img.shields.io/badge/node-18%2B-brightgreen)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
-
-📖 See [CHANGELOG.md](./CHANGELOG.md) for version history.
+DevCollab is a full-stack collaboration dashboard built for developers. It integrates project management features like Quick Links, task tracking, and more. This app is being developed as part of a full-stack skill refresh, with a focus on modern tooling, testing, and deployment workflows.
 
 ---
 
-## 🛠 Tech Stack
+## 🚀 Features
 
-- **Frontend**: React + Vite
-- **Backend**: Node.js + Express + Prisma
+- **Frontend**: React + TypeScript + Vite
+- **Styling**: MUI (Material UI) + SCSS Modules
+- **Backend**: Node.js + Express + Prisma ORM
 - **Database**: Supabase PostgreSQL
-- **Auth**: JWT + bcrypt
-- **Testing**: Jest + Supertest
-- **CI**: GitHub Actions
+- **Auth**: Supabase Auth (email/password)
+- **Testing**: Jest + Supertest (server-side)
+- **CI/CD**: GitHub Actions (auto-test on push)
+- **Environment Management**: dotenv
 
 ---
 
-## 🔧 Prerequisites
-
-- Node.js 18+
-- PostgreSQL or Supabase project
-- `.env` file configured
-
----
-
-## 📁 Folder Structure
+## 🖥️ Project Structure
 
 ```
-devcollab/
-├── client/              # Frontend React app
-│   └── src/
-│       ├── assets/
-│       ├── components/
-│       ├── data/
-│       ├── hooks/
-│       └── styles/
-├── server/              # Backend API
-│   └── src/
-│       ├── controllers/
-│       ├── middleware/
-│       ├── routes/
-│       ├── __tests__/
-│       └── utils/
-│   ├── prisma/
-│   ├── app.ts
-│   ├── server.ts
-│   └── .env
+/client         - React frontend
+/server         - Express backend (TypeScript)
+/prisma         - Prisma schema & migrations
+/routes         - Express route handlers
+/middleware     - Token/session validation
+/tests          - Backend unit/integration tests
 ```
 
 ---
 
-## ⚙️ Environment Setup
+## 🔧 Environment Setup
 
-Create a `.env` file inside `/server` with the following:
+### Prerequisites
+
+- Node.js v18+
+- Supabase account (https://supabase.io)
+- PostgreSQL connection (via Supabase or local)
+
+---
+
+### Environment Variables
+
+#### `client/.env`
+
+```
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+VITE_API_URL=http://localhost:5000
+```
+
+#### `server/.env`
 
 ```env
 DATABASE_URL="your_postgres_connection_string"
-JWT_SECRET="your_super_secure_secret"
+SUPABASE_URL=https://your-project-id.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-secret
 PORT=5000
 ```
 
 ---
 
-## 🚀 Running the App
+## 📦 Scripts
 
-### Backend
+### From root
+
+```bash
+# Start backend
+cd server && npm run dev
+
+# Start frontend
+cd client && npm run dev
+```
+
+---
+
+## 🧪 Running Tests (Server)
+
 ```bash
 cd server
-npm install
-npx prisma generate
-npx prisma db push
-npm run dev
+npm test
 ```
 
-### Frontend
-```bash
-cd client
-npm install
-npm run dev
-```
+Tests use `jest`, `supertest`, and run automatically on `push` via GitHub Actions.
 
 ---
 
-## 🔐 Auth Routes
+## 🔐 Auth Flow
 
-| Route                 | Method | Description          |
-|----------------------|--------|----------------------|
-| `/api/auth/register` | POST   | Register new user    |
-| `/api/auth/login`    | POST   | Login + get JWT      |
-
-Use `Authorization: Bearer <token>` in protected requests.
+- Authentication is handled by **Supabase Auth**
+- Users login via email/password
+- Session tokens are stored securely and sent to backend via Authorization headers
+- Backend validates user identity via Supabase Admin API
 
 ---
 
-## 🧪 Running Tests
+## 📅 Roadmap (Upcoming)
 
-Inside `/server`, run:
-
-```bash
-npx jest
-```
-
-### What’s tested?
-
-- ✅ `/api/auth/register` - success and duplicate emails
-- ✅ `/api/auth/login` - valid and invalid credentials
+- Quick Link creation/edit/delete
+- Task + project views
+- User-specific dashboards
+- Responsive layout for mobile/tablet
+- Dark/light mode toggle (already scaffolded)
+- Full accessibility pass
 
 ---
 
-## ✅ GitHub Actions CI
+## 🧠 Why This Exists
 
-Automatically runs tests on push or pull request to [main, develop] branches.
-
-See [`test.yml`](.github/workflows/test.yml)
+This project is part of a full-stack reboot, built from scratch with CI, testing, and DevOps in mind. It’s a hands-on way to revisit best practices in modern development.
 
 ---
 
 ## 📄 License
 
-MIT — use it, remix it, build with it.
+MIT

@@ -1,16 +1,12 @@
-import express from "express";
-import cors from "cors";
-import authRoutes from "./routes/authRoutes";
+import express from 'express';
+import cors from 'cors';
+import quickLinks from './routes/QuickLinks';
+import testRoute from './routes/testRoute';
 
 const app = express();
-app.use(cors());             // ✅ Cross-origin requests (CORS)
-app.use(express.json());     // ✅ Must be before any routes!
-
-// ✅ Register routes AFTER body parser
-app.use("/api/auth", authRoutes);
-
-// app.get("/", (req, res) => {
-//   res.send("DevCollab API is running 🚀");
-// });
+app.use(cors()); // ✅ Cross-origin requests (CORS)
+app.use(express.json()); // ✅ Must be before any routes!
+app.use('/api/quicklinks', quickLinks);
+app.use('/test', testRoute);
 
 export default app;

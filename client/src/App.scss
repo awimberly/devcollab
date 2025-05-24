@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;  
+  padding: 2rem;
 
   > .header {
     display: flex;
@@ -15,19 +15,25 @@
     }
 
     > .theme-toggle {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-      
-        > svg {
-          font-size: 2.5rem;
-        }
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+
+      > svg {
+        font-size: 2.5rem;
+      }
+
+      .MuiButton-root {
+        text-transform: none; // Prevents ALL CAPS
+        font-size: 0.85rem;
+        font-weight: bold;
+      }
     }
   }
 }
 
 .App {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   color: #333;
 }
-

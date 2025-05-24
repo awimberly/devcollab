@@ -1,9 +1,10 @@
 {
   "name": "devcollab",
-  "version": "0.1.1",
+  "version": "0.3.1",
   "devDependencies": {
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
+    "prettier": "^3.5.3",
     "standard-version": "^9.5.0"
   },
   "config": {
@@ -12,6 +13,10 @@
     }
   },
   "scripts": {
-    "release": "standard-version"
+    "release": "standard-version",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "react-router-dom": "^7.6.0"
   }
 }
