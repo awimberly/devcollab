@@ -1,35 +1,34 @@
 .quick-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #1976d280;
-    border-radius: 4px;
-    width: 200px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    background: #fff;
-    padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1976d280;
+  border-radius: 4px;
+  width: 200px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: #fff;
+  padding: 1rem;
 
-    > .quick-link-header > h2 {
-        margin: 10px;
+  > .quick-link-header > h2 {
+    margin: 10px;
+  }
+
+  > .quick-links-list {
+    > .MuiStack-root:last-child {
+      margin-bottom: 10px;
     }
 
-    > .quick-links-list {
-        
-        > .MuiStack-root:last-child {
-            margin-bottom: 10px;
-        }
-        
-        .quick-link-item {
-            display: flex;        
-            justify-content: center;
-            
-           > a {
-                min-width: 170px;
-                text-transform: none;
-           }
-        }
+    .quick-link-item {
+      display: flex;
+      justify-content: center;
+
+      > a {
+        min-width: 170px;
+        text-transform: none;
+      }
     }
+  }
 }
 
 .dashboard-container {
@@ -39,4 +38,3 @@
   min-height: calc(100vh - 64px); // full height minus header height
   padding: 2rem;
 }
-

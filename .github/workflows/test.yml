@@ -27,4 +27,3 @@ jobs:
 
       - name: Skip backend tests temporarily (auth refactor)
         run: echo "Tests temporarily disabled due to Supabase Auth migration"
-

@@ -1,7 +1,7 @@
 // src/server.ts
-import app from "./app";
-import { PrismaClient } from "@prisma/client";
-import dotenv from "dotenv";
+import app from './app';
+import { PrismaClient } from '@prisma/client';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ async function startServer() {
       console.log(`🚀 Server running on http://localhost:${PORT}`);
     });
   } catch (error) {
-    console.error("❌ Server failed to start", error);
+    console.error('❌ Server failed to start', error);
   }
 }
 
