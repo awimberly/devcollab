@@ -1,22 +1,22 @@
-import { useState } from "react";
-import { supabase } from "../supabase";
-import { useNavigate } from "react-router-dom";
-import "./Login.scss";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert";
-import { syncUserToDb } from "../utils/syncUserToDb";
+import { useState } from 'react';
+import { supabase } from '../supabase';
+import { useNavigate } from 'react-router-dom';
+import './Login.scss';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
+import { syncUserToDb } from '../utils/syncUserToDb';
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setError('');
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -27,8 +27,8 @@ function Login() {
       setError(error.message);
     } else {
       await syncUserToDb();
-      console.log("Login success:", data);
-      navigate("/");
+      console.log('Login success:', data);
+      navigate('/');
     }
   };
 
@@ -58,20 +58,11 @@ function Login() {
             fullWidth
           />
         </div>
-        <p
-          className="forgot-password"
-          onClick={() => alert("Forgot password flow coming soon!")}
-        >
+        <p className="forgot-password" onClick={() => alert('Forgot password flow coming soon!')}>
           Forgot password?
         </p>
         {error && <Alert severity="error">{error}</Alert>}
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          fullWidth
-          sx={{ mt: 2 }}
-        >
+        <Button variant="contained" color="primary" type="submit" fullWidth sx={{ mt: 2 }}>
           Log in
         </Button>
       </form>

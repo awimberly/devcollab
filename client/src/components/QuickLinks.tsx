@@ -1,7 +1,7 @@
-import "./QuickLinks.scss";
-import { devLinks } from "../data/devLinks";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import './QuickLinks.scss';
+import { devLinks } from '../data/devLinks';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 function QuickLinks() {
   const links = devLinks.map((link, index) => (
