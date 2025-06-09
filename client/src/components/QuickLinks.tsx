@@ -1,24 +1,42 @@
 import './QuickLinks.scss';
-import { devLinks } from '../data/devLinks';
-import Stack from '@mui/material/Stack';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
+//import Button from '@mui/material/Button';
+import { supabase } from '../supabase';
+import { ButtonBase } from '@mui/material';
 
-function QuickLinks() {
-  const links = devLinks.map((link, index) => (
-    <div key={index} className="quick-link-item">
-      <Button
-        component="a"
-        variant="outlined"
-        href={link.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        size="medium"
-        className="quick-link-button"
-      >
-        {link.label}
-      </Button>
-    </div>
-  ));
+type QuickLink = {
+  id: string;
+  url: string;
+  label: string;
+};
+
+export function QuickLinks() {
+  const [links, setLinks] = useState<QuickLink[]>([]);
+
+  useEffect(() => {
+    console.log('[QuickLinks] Fetching via supabase client...');
+
+    const fetchLinks = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (!session?.user) return;
+
+      const { data, error } = await supabase
+        .from('quicklinks')
+        .select('*')
+        .order('createdAt', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching quick links:', error);
+        return;
+      }
+      setLinks(data);
+    };
+
+    fetchLinks();
+  }, []);
 
   return (
     <div className="dashboard-container">
@@ -27,7 +45,13 @@ function QuickLinks() {
           <h2>Quick Links</h2>
         </div>
         <div className="quick-links-list">
-          <Stack spacing={1}>{links}</Stack>
+          {links.map((link) => (
+            <div key={link.id}>
+              <Button href={link.url} target="_blank" rel="noopener noreferrer" variant="outlined">
+                {link.label}
+              </Button>
+            </div>
+          ))}
         </div>
       </div>
     </div>

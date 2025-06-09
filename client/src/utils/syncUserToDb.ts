@@ -15,6 +15,9 @@ export const syncUserToDb = async () => {
 
   const user = session.user;
 
+  // Log user ID for policy comparison
+  console.log('[syncUserToDb] Auth UID:', user.id);
+
   const payload = {
     id: user.id,
     email: user.email,
@@ -49,5 +52,5 @@ export const syncUserToDb = async () => {
   }
 
   console.log('[syncUserToDb] Upsert result:', data);
-  return user.id;
+  return user;
 };
