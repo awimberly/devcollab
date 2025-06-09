@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [Unreleased]
+
+### Added
+
+- Supabase RLS policy files for `quicklinks`, `projects`, `tasks`, and `users`
+- `/supabase/policies/` folder for SQL policy scripts
+- Updated `README.md` with Supabase setup instructions (excluding schema.sql)
+
 ## [0.3.1] - 2025-05-24
 
 ### Added

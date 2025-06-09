@@ -112,6 +112,37 @@ This project is part of a full-stack reboot, built from scratch with CI, testing
 
 ---
 
+---
+
+## 🧪 Supabase Setup
+
+1. **Create your Supabase project**
+
+   - Go to [https://supabase.io](https://supabase.io)
+   - Create a new project, set a database password, and save your Project URL + anon key
+
+2. **Apply Row-Level Security (RLS) policies**
+
+   - Open the Supabase SQL Editor
+   - Paste each policy file one at a time from:
+
+     ```
+     supabase/policies/quicklinks.sql
+     supabase/policies/projects.sql
+     supabase/policies/tasks.sql
+     supabase/policies/users.sql
+     ```
+
+3. **Set up environment variables**  
+   In `/client/.env`, add your Supabase credentials:
+
+   ```env
+   VITE_SUPABASE_URL=https://<your-project-ref>.supabase.co
+   VITE_SUPABASE_ANON_KEY=your-anon-key
+   ```
+
+---
+
 ## 📄 License
 
 MIT

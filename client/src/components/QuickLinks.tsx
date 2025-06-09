@@ -47,7 +47,13 @@ export function QuickLinks() {
         <div className="quick-links-list">
           {links.map((link) => (
             <div key={link.id}>
-              <Button href={link.url} target="_blank" rel="noopener noreferrer" variant="outlined">
+              <Button
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="outlined"
+                className="quick-link-item"
+              >
                 {link.label}
               </Button>
             </div>
